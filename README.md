@@ -55,6 +55,9 @@ _How long should this take?_
 _What should the resulting product be?_
 - Ideally, your code, submitted with enough time to let us review it. During the actual technical interview, we'd like to see it run, and talk about what you did.
 
+_Am I working on an actual product? How will you use the code I produce?_
+- No, this project is a complete fabrication. It only exists for the purposes of evaluation and conversation. Likewise, the code you produce will only be used for assessment purposes. It will not be used in any product or project, private or public. If you have ideas you would like to share about how we can improve this exercise, we will gladly accept them, but we have no interest in stealing your hard work.
+
 _What resources am I allowed to use?_
 - This is unashamedly open-book. Google is your friend. Christopher Green from the interview process is happy to help as well. 
 If you find the need for a new `npm` package, add it. If you think heavy refactoring is in order, go for it! What we ask for is honesty and transparency in your decision-making process. 
