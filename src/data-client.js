@@ -22,7 +22,7 @@ const dataCenters = load('./src/data/datacenters.json');
 
 /**
  * Provides an interface to datacenter and building data.
- * Also a reasonable place for data mutations/transforms. See `enableImport`;
+ * Also a reasonable place for data mutations/transforms. See `enableImport`; <================= What a sly dog
  */
 class DataClient {
   constructor(obj) {
@@ -56,8 +56,12 @@ class DataClient {
    * on the api this value must be true.
    */
   enableImport() {
-    console.log(dataCenters)
-    this.dataCenters = this.dataCenters.map((dc) => ({ ...dc, import: true}))
+    this.dataCenters = this.dataCenters.map((dc) => ({ 
+      ...dc, 
+      operationalDate: new Date(dc.operationalDate).toISOString(),
+      buildings: dc.buildingIds.map((id) => { return buildings.find((object) => object.id === id) }),
+      import: true})
+    )
   }
 }
 

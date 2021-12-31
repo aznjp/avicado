@@ -49,11 +49,13 @@ class ApiClient {
   }
 
   /**
-   * Update an existing record
+   * Delete an existing record
    * @param {String} id - identifier
    * @param {Object} body - probably a datacenter object
    * @returns {Promise<unknown>}
    */
+
+  // This will allow for the API Request to also potentially handle delete functions for the future utilizing CRUD Methods
    async delete(id, body) {
     return fetch(this.endpoint(`${BASE_RESOURCE_NAME}/\${id}`, { id }), {
       body: typeof body === 'object' ? JSON.stringify(body) : body,

@@ -63,8 +63,7 @@ class Batch {
    */
   async process() {
     this.sent = 0;
-    this.processStart = (new Date()).toISOString();
-    console.log(this.processStart)
+    this.processStart = (new Date()).getTime();
     const { fn } = this;
     try {
       const responses = await Promise.all(this.records.map(async (datacenter) => {

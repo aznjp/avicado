@@ -1,6 +1,6 @@
 const { isFalsy, isJson } = require("./utils");
 const defaultOptions = {
-  suppressErrors: true,
+  suppressErrors: false,
   logResponse: false,
 };
 
