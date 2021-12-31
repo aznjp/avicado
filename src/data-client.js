@@ -56,9 +56,9 @@ class DataClient {
    * on the api this value must be true.
    */
   enableImport() {
-    this.dataCenters = this.dataCenters.map((dc) => ({ ...dc, import: true }));
+    console.log(dataCenters)
+    this.dataCenters = this.dataCenters.map((dc) => ({ ...dc, import: true}))
   }
-
 }
 
 const dataClient = new DataClient({ buildings, dataCenters });

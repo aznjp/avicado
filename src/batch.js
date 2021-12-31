@@ -1,6 +1,6 @@
 const { apiClient } = require('./api-client');
 const { isFalsy, colors } = require('./utils');
-const {dataClient} = require("./data-client");
+const { dataClient } = require("./data-client");
 const { simplifyResults } = require('./utils');
 const { Request } = require('./request');
 
@@ -63,7 +63,8 @@ class Batch {
    */
   async process() {
     this.sent = 0;
-    this.processStart = (new Date()).getTime();
+    this.processStart = (new Date()).toISOString();
+    console.log(this.processStart)
     const { fn } = this;
     try {
       const responses = await Promise.all(this.records.map(async (datacenter) => {

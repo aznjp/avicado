@@ -11,23 +11,31 @@ const template = (str, values) => {
   let templateString = str.slice();
   const regexp = /\${([^}}]+)}/g;
   // eslint-disable-next-line no-restricted-syntax
+  
+  // This seems to just force it to match the constant match (which is an array of segments with props) with the regex we have at the variable regexp 
   for (const match of templateString.matchAll(regexp)) {
     const [ segment, prop ] = match;
     let value = values[prop];
+    // This will force it to state the error if the type of information is configured as something other than intended which is a string value?
     if (typeof value === 'undefined' || value === null) {
       throw new Error(`No value provided for '${prop}'`);
+      // If it is a validated object it is then checked to see if it is a function 
     } else if (typeof value.toString === 'function') {
       value = value.toString();
     } else {
+      // in all other instances besides this it will state there is no object
       throw new Error(`No value provided for '${prop}'`);
     }
+    // The template is then replaced in the array for match at the top with the new value as a string
     templateString = templateString.replace(segment, value.toString());
   }
   return templateString;
 };
 
 const isNullish = v => (v === null || v === undefined);
+// Anything that is the following; null or undefined; a boolean; a string with no characters; an array with no objects within it;
 const isFalsy = v => (isNullish(v) || typeof v === 'boolean' && !v || typeof v === 'string' && v.length === 0 || Array.isArray(v) && v.length === 0);
+// Anything that is not isNullish
 const isTruthy = v => !(isNullish(v));
 
 /**
@@ -41,6 +49,7 @@ const isTruthy = v => !(isNullish(v));
 const combineCounts = function(counts = []) {
   return counts.reduce((acc, count) => {
     for (const key of Object.keys(count)) {
+      // Ensures that the object has this property in the first plalce with specifice keys otherwise it will add one for it
       if (!acc.hasOwnProperty(key)) {
         acc[key] = count[key];
       } else {

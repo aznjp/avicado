@@ -49,6 +49,20 @@ class ApiClient {
   }
 
   /**
+   * Update an existing record
+   * @param {String} id - identifier
+   * @param {Object} body - probably a datacenter object
+   * @returns {Promise<unknown>}
+   */
+   async delete(id, body) {
+    return fetch(this.endpoint(`${BASE_RESOURCE_NAME}/\${id}`, { id }), {
+      body: typeof body === 'object' ? JSON.stringify(body) : body,
+      method: 'DELETE',
+      headers: {'Content-Type': 'application/json'},
+    });
+  }
+  
+  /**
    * Status. Gives you confidence that the api is alive and well.
    * @returns {Promise<unknown>}
    */

@@ -26,8 +26,10 @@ class Import {
   async preprocess() {
     // Check on api status prior to attempting writes!
     await apiClient.status();
+    console.log(apiClient)
 
     dataClient.enableImport();
+    console.log(dataClient.enableImport())
   }
 
   /**
@@ -46,7 +48,7 @@ class Import {
         apiAction: apiClient.update.bind(apiClient),
       }
     ];
-
+    
     const results = await Promise.all(batches.map(async ({ data, apiAction }) => {
       if (this.options.logTiming) console.log(`[${(new Date()).toTimeString()}] - ${apiAction.name} starting`);
       let start = (new Date()).getTime();
