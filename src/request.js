@@ -1,6 +1,6 @@
 const { isFalsy, isJson } = require("./utils");
 const defaultOptions = {
-  suppressErrors: false,
+  suppressErrors: true,
   logResponse: false,
 };
 
@@ -43,19 +43,30 @@ class Request {
    * Returns a combination of response, and parsed response body.
    * @returns {Promise<({headers: string, error: boolean, body: string, status: string}|{message: *}|string)[]>}
    */
+
   async perform() {
     const { apiAction } = this;
     let response;
     let body;
+
     try {
       response = await apiAction(...this.requestArgs);
+      // console.log(response)
       if (isJson(response)) {
         body = await response.json();
+        console.log(body.error)
+
       } else {
         // 429, 404, and several other responses come back as text.
         const message = await response.text();
         body = { message, error: true, status: response.status };
+        // console.log(body.message, body.status)
+        // if (body.status === 500 ) {
+        //   console.log("error with 500 code")
+        // }
+        // console.log(Promise.resolve(body))
       }
+
     } catch(e) {
       if (!this.options.suppressErrors) {
         throw e;
@@ -67,6 +78,8 @@ class Request {
         headers: ''
       };
       body = `${e}\n${e.stackTrace}`;
+      // console.log(body)
+      // console.log (Promise.reject(body))
     }
     if (this.options.logResponse) {
       console.log(`[${(new Date()).toTimeString()}] - ${this.apiAction.name} - response and body:`, response, body);

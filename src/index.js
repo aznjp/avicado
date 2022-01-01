@@ -26,10 +26,8 @@ class Import {
   async preprocess() {
     // Check on api status prior to attempting writes!
     await apiClient.status();
-    console.log(dataClient.buildings);
 
     dataClient.enableImport();
-    
   }
 
   /**
