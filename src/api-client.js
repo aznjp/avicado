@@ -6,6 +6,7 @@ const HOST = 'https://us-central1-tech-interview-api.cloudfunctions.net/base';
 const BASE_PATH = 'api';
 const BASE_RESOURCE_NAME = 'datacenters';
 
+
 /**
  * Handles requests to the api.
  */
